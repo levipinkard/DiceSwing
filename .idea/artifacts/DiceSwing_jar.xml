@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="DiceSwing:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DiceSwing_jar</output-path>
+    <root id="archive" name="DiceSwing.jar">
+      <element id="module-output" name="DiceSwing" />
+    </root>
+  </artifact>
+</component>

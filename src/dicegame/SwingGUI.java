@@ -18,9 +18,12 @@ public class SwingGUI {
     private JButton aboutButt;
     private JPanel buttons;
     private JButton backButt;
-    private JScrollPane buttonScroll;
+    //Creates variables for stats
+    private int[] sideCount;
+    private int sides;
+    private int totalRolls;
     //Constructor, is passed Die array from DiePicker class
-    public SwingGUI(Die[] dieArray) {
+    public SwingGUI(Die[] dieArray,int sideIn) {
         //Sets default values for width and height
         width = 600;
         height  = 400;
@@ -39,6 +42,9 @@ public class SwingGUI {
         buttons = new JPanel(new WrapLayout());
         aboutButt = new JButton();
         backButt = new JButton();
+        sides = sideIn;
+        sideCount = new int[sides];
+        totalRolls = 0;
     }
     //Method to actually run GUI
     public void runGUI() {
@@ -91,14 +97,24 @@ public class SwingGUI {
                 for (int x = 0; x < dice.length; x++){
                     //Rolls die
                     dice[x].roll(x);
-                    //Sets JLabel to Unicode character for current face of die
-                    int codePoint = 9855 + dice[x].getCurrentSide();
-                    dieDraw[x].setText(new String(Character.toChars(codePoint)));
+                    if (sides <= 6) {
+                        //Sets JLabel to Unicode character for current face of die
+                        int codePoint = 9855 + dice[x].getCurrentSide();
+                        dieDraw[x].setText(new String(Character.toChars(codePoint)));
+                        sideCount[dice[x].getCurrentSide() -1] += 1;
+                        totalRolls++;
+                    }
+                    else {
+                        dieDraw[x].setFont(new Font(dieDraw[x].getFont().getName(), Font.PLAIN, 60));
+                        dieDraw[x].setText("[" + Integer.toString(dice[x].getCurrentSide()) + "]");
+                        sideCount[dice[x].getCurrentSide() -1] += 1;
+                        totalRolls++;
+                    }
                 }
             }
             //Launches about dialog, keeps this window open
             else if(e.getActionCommand().equals("About")){
-                AboutWindow aboutGUI = new AboutWindow();
+                AboutWindow aboutGUI = new AboutWindow(sideCount,totalRolls);
                 aboutGUI.runGUI();
             }
             //If back button is hit, it creates an instance of the first dialog (DiePicker, in this case), runs it, then disposes of this window, deleting all contents

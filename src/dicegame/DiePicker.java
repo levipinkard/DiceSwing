@@ -15,25 +15,34 @@ public class DiePicker {
     private JButton enterButton;
     //Creates prompt to enter number of dice
     private JLabel diePrompt;
-
+    private JScrollPane textScroll;
+    private JPanel buttonPanel;
     public DiePicker() {
         //Constructs all UI features
         dieEnter = new JTextField();
         frame1 = new JFrame();
         enterButton = new JButton();
         diePrompt = new JLabel();
+        buttonPanel = new JPanel();
+        textScroll = new JScrollPane(dieEnter);
+        buttonPanel = new JPanel();
     }
 
     public void runGUI() {
+        //Adds button to panel
+        buttonPanel.add(enterButton);
         //Stops frame from being resized
         frame1.setResizable(false);
-        //Sets up layout, puts prompt on top, text field in middle, and enter on bottom
+        //Sets up layout, puts prompt on top, text field in middle (with scroll bar), and button panel on bottom
         frame1.getContentPane().add(BorderLayout.NORTH,diePrompt);
-        frame1.getContentPane().add(BorderLayout.CENTER, dieEnter);
-        frame1.getContentPane().add(BorderLayout.SOUTH, enterButton);
+        frame1.getContentPane().add(BorderLayout.CENTER, textScroll);
+        frame1.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
         //Sets preferred size, stops packing from removing space
         frame1.setPreferredSize(new Dimension(200, 120));
+        buttonPanel.setPreferredSize(new Dimension(100,40));
+        //Aligns everything in the middle
         dieEnter.setHorizontalAlignment(JTextField.CENTER);
+        diePrompt.setHorizontalAlignment(JTextField.CENTER);
         //Stops program when window is closed
         frame1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //Sets title to little dice unicode character, not long enough for full Dice Roll title

@@ -18,6 +18,7 @@ public class SwingGUI {
     private JButton aboutButt;
     private JPanel buttons;
     private JButton backButt;
+    private JScrollPane buttonScroll;
     //Constructor, is passed Die array from DiePicker class
     public SwingGUI(Die[] dieArray) {
         //Sets default values for width and height
@@ -34,7 +35,8 @@ public class SwingGUI {
         dieDraw = new JLabel[dice.length];
         //Creates scrollPane with diePanel component
         scrollPane = new JScrollPane(diePanel);
-        buttons = new JPanel();
+        //Automatically wraps buttons
+        buttons = new JPanel(new WrapLayout());
         aboutButt = new JButton();
         backButt = new JButton();
     }
@@ -55,7 +57,7 @@ public class SwingGUI {
         buttons.add(backButt);
         buttons.add(rollButton);
         buttons.add(aboutButt);
-        //Adds buttons frame to bottom of frame
+        //Adds button panel to frame
         frame1.add(BorderLayout.SOUTH, buttons);
         for (int y = 0; y < dieDraw.length; y++) {
             //Constructs all of dieDraw arrays

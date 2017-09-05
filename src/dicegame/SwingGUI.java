@@ -1,8 +1,8 @@
 package dicegame;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 public class SwingGUI {
     //Creates instance variable for die array
     private Die[] dice;
@@ -22,6 +22,7 @@ public class SwingGUI {
     private int[] sideCount;
     private int sides;
     private int totalRolls;
+    private boolean dieBool[];
     //Constructor, is passed Die array from DiePicker class
     public SwingGUI(Die[] dieArray,int sideIn) {
         //Sets default values for width and height
@@ -45,6 +46,7 @@ public class SwingGUI {
         sides = sideIn;
         sideCount = new int[sides];
         totalRolls = 0;
+        dieBool = new boolean[dice.length];
     }
     //Method to actually run GUI
     public void runGUI() {
@@ -72,6 +74,7 @@ public class SwingGUI {
             dieDraw[y].setFont(new Font(dieDraw[y].getFont().getName(), Font.PLAIN, 100));
             //Adds dieDraw label to diePanel
             diePanel.add(dieDraw[y]);
+            dieBool[y] = true;
         }
         //Adds scrollPane to main frame
         frame1.getContentPane().add(BorderLayout.CENTER, scrollPane);
@@ -83,6 +86,35 @@ public class SwingGUI {
         rollButton.addActionListener(new ButtonListener());
         aboutButt.addActionListener(new ButtonListener());
         backButt.addActionListener(new ButtonListener());
+        for (int h = 0; h < dice.length; h++) {
+            dieDraw[h].addMouseListener(new MouseListen());
+        }
+    }
+    class MouseListen implements MouseListener {
+        public void mouseClicked(MouseEvent e) {
+            for (int i = 0; i < dice.length; i++)
+                if (e.getSource() == dieDraw[i]) {
+                    dieBool[i] = !dieBool[i];
+                    if (dieBool[i] == false) {
+                        dieDraw[i].setForeground(Color.RED);
+                    }
+                    else {
+                        dieDraw[i].setForeground(Color.DARK_GRAY);
+                    }
+            }
+        }
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
     }
     //Creates ButtonListener class to run for each button
     class ButtonListener implements ActionListener {
@@ -95,20 +127,21 @@ public class SwingGUI {
             if (e.getActionCommand().equals("Roll")) {
                 //Runs through every die
                 for (int x = 0; x < dice.length; x++){
-                    //Rolls die
-                    dice[x].roll(x);
-                    if (sides <= 6) {
-                        //Sets JLabel to Unicode character for current face of die
-                        int codePoint = 9855 + dice[x].getCurrentSide();
-                        dieDraw[x].setText(new String(Character.toChars(codePoint)));
-                        sideCount[dice[x].getCurrentSide() -1] += 1;
-                        totalRolls++;
-                    }
-                    else {
-                        dieDraw[x].setFont(new Font(dieDraw[x].getFont().getName(), Font.PLAIN, 60));
-                        dieDraw[x].setText("[" + Integer.toString(dice[x].getCurrentSide()) + "]");
-                        sideCount[dice[x].getCurrentSide() -1] += 1;
-                        totalRolls++;
+                    if (dieBool[x]) {
+                        //Rolls die
+                        dice[x].roll(x);
+                        if (sides <= 6) {
+                            //Sets JLabel to Unicode character for current face of die
+                            int codePoint = 9855 + dice[x].getCurrentSide();
+                            dieDraw[x].setText(new String(Character.toChars(codePoint)));
+                            sideCount[dice[x].getCurrentSide() - 1] += 1;
+                            totalRolls++;
+                        } else {
+                            dieDraw[x].setFont(new Font(dieDraw[x].getFont().getName(), Font.PLAIN, 60));
+                            dieDraw[x].setText("[" + Integer.toString(dice[x].getCurrentSide()) + "]");
+                            sideCount[dice[x].getCurrentSide() - 1] += 1;
+                            totalRolls++;
+                        }
                     }
                 }
             }

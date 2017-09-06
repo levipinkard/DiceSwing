@@ -109,7 +109,7 @@ public class DiePicker {
                         diePrompt.setText("How many dice? AT LEAST ONE");
                     }
                     if (Integer.valueOf(sideEnter.getText()) < 3) {
-                        sidePrompt.setText("How many sides? MORE THAN 2");
+                        sidePrompt.setText("How many sides? AT LEAST ONE");
                     }
                 }
             }

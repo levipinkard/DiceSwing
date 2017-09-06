@@ -1,5 +1,6 @@
 package dicegame;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class Die {
@@ -7,15 +8,15 @@ public class Die {
     int sides;
     int currentSide;
     //Random number generator instance
-    Random generator;
+    SecureRandom generator;
     //Takes in number of possible sides, and a number to be added to the seed
     public Die(int givenSides, int seedAdd) {
         //Sets sides equal to sides given by method call
         sides = givenSides;
         //Starting side is invalid, prevents wrong data from being given with random class malfunction
         currentSide = 0;
-        //Contructs generator, supplies first seed to be current system time in milliseconds
-        generator = new Random(System.currentTimeMillis());
+        //Constructs generator, supplies first seed to be current system time in milliseconds
+        generator = new SecureRandom();
         //Rolls die immediately to get first currentSide value
         roll(seedAdd);
     }

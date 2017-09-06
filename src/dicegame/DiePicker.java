@@ -22,6 +22,7 @@ public class DiePicker {
     private JPanel buttonPanel;
     private JPanel textPanel;
     private int sideCount;
+    private JCheckBox unicodeCheck;
     public DiePicker() {
         //Constructs all UI features
         dieEnter = new JTextField();
@@ -34,6 +35,7 @@ public class DiePicker {
         sideScroll = new JScrollPane(sideEnter);
         textScroll = new JScrollPane(dieEnter);
         textPanel = new JPanel(new WrapLayout());
+        unicodeCheck = new JCheckBox("Enable Unicode",true);
         sideCount = 3;
     }
 
@@ -44,13 +46,14 @@ public class DiePicker {
         textPanel.add(textScroll);
         textPanel.add(sidePrompt);
         textPanel.add(sideScroll);
+        textPanel.add(unicodeCheck);
         //Stops frame from being resized
         frame1.setResizable(false);
         //Sets up layout, puts prompt on top, text field in middle (with scroll bar), and button panel on bottom
         frame1.getContentPane().add(BorderLayout.NORTH, textPanel);
         frame1.getContentPane().add(BorderLayout.SOUTH, buttonPanel);
         //Sets preferred size, stops packing from removing space
-        frame1.setPreferredSize(new Dimension(200, 200));
+        frame1.setPreferredSize(new Dimension(200, 220));
         buttonPanel.setPreferredSize(new Dimension(100,40));
         textScroll.setPreferredSize(new Dimension(190,35));
         sideScroll.setPreferredSize(new Dimension(190,35));
@@ -84,7 +87,7 @@ public class DiePicker {
             //Sees if action command is from Enter button, not really required, adds flexibility
             if (e.getActionCommand().equals("Enter")) {
                 //Checks if number/string is valid (above 0, integer)
-                if ((("" + Integer.valueOf(dieEnter.getText())).equals(dieEnter.getText()) & Integer.valueOf(dieEnter.getText()) > 0) && (("" + Integer.valueOf(sideEnter.getText())).equals(sideEnter.getText()) & Integer.valueOf(sideEnter.getText()) > 2)) {
+                if ((("" + Integer.valueOf(dieEnter.getText())).equals(dieEnter.getText()) & Integer.valueOf(dieEnter.getText()) > 0) && (("" + Integer.valueOf(sideEnter.getText())).equals(sideEnter.getText()) & Integer.valueOf(sideEnter.getText()) > 0)) {
                     sideCount = Integer.valueOf(sideEnter.getText());
                     //Creates die array based on number supplied by user
                     Die dice[] = new Die[Integer.valueOf(dieEnter.getText())];
@@ -94,7 +97,7 @@ public class DiePicker {
                         dice[x] = new Die(sideCount,x);
                     }
                     //Creates and constructs main die GUI
-                    SwingGUI swingGUI = new SwingGUI(dice,sideCount);
+                    SwingGUI swingGUI = new SwingGUI(dice,sideCount, unicodeCheck.isSelected());
                     //Allows this frame to be thrown away and cleaned up
                     frame1.dispose();
                     //Runs main GUI

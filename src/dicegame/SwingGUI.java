@@ -23,8 +23,9 @@ public class SwingGUI {
     private int sides;
     private int totalRolls;
     private boolean dieBool[];
+    private  boolean enableUnicode;
     //Constructor, is passed Die array from DiePicker class
-    public SwingGUI(Die[] dieArray,int sideIn) {
+    public SwingGUI(Die[] dieArray,int sideIn, boolean uniCheck) {
         //Sets default values for width and height
         width = 600;
         height  = 400;
@@ -47,6 +48,7 @@ public class SwingGUI {
         sideCount = new int[sides];
         totalRolls = 0;
         dieBool = new boolean[dice.length];
+        enableUnicode = uniCheck;
     }
     //Method to actually run GUI
     public void runGUI() {
@@ -130,7 +132,7 @@ public class SwingGUI {
                     if (dieBool[x]) {
                         //Rolls die
                         dice[x].roll(x);
-                        if (sides <= 6) {
+                        if (sides <= 6 && enableUnicode) {
                             //Sets JLabel to Unicode character for current face of die
                             int codePoint = 9855 + dice[x].getCurrentSide();
                             dieDraw[x].setText(new String(Character.toChars(codePoint)));

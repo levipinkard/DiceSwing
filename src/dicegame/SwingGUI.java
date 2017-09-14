@@ -154,7 +154,7 @@ public class SwingGUI {
             }
             //If back button is hit, it creates an instance of the first dialog (DiePicker, in this case), runs it, then disposes of this window, deleting all contents
             else if(e.getActionCommand().equals("Back")){
-                DiePicker pickGUI = new DiePicker();
+                DiePicker pickGUI = new DiePicker(enableUnicode,sides,dice.length);
                 pickGUI.runGUI();
                 frame1.dispose();
             }

@@ -36,9 +36,26 @@ public class DiePicker {
         textScroll = new JScrollPane(dieEnter);
         textPanel = new JPanel(new WrapLayout());
         unicodeCheck = new JCheckBox("Enable Unicode",true);
-        sideCount = 3;
+        sideCount = 6;
     }
-
+    //Second constructor for opening window with existing values
+    public DiePicker(boolean persUni, int persSides, int persDice ) {
+        //Constructs all UI features
+        dieEnter = new JTextField();
+        frame1 = new JFrame();
+        enterButton = new JButton();
+        diePrompt = new JLabel();
+        sidePrompt = new JLabel();
+        buttonPanel = new JPanel();
+        sideEnter = new JTextField();
+        sideScroll = new JScrollPane(sideEnter);
+        textScroll = new JScrollPane(dieEnter);
+        textPanel = new JPanel(new WrapLayout());
+        unicodeCheck = new JCheckBox("Enable Unicode",persUni);
+        sideCount = persSides;
+        sideEnter.setText(Integer.toString(persSides));
+        dieEnter.setText(Integer.toString(persDice));
+    }
     public void runGUI() {
         //Adds button to panel
         buttonPanel.add(enterButton);

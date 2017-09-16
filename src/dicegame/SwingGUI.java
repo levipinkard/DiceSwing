@@ -25,12 +25,12 @@ public class SwingGUI {
     private boolean dieBool[];
     private  boolean enableUnicode;
     //Constructor, is passed Die array from DiePicker class
-    public SwingGUI(Die[] dieArray,int sideIn, boolean uniCheck) {
+    public SwingGUI(Die[] dice,int sides, boolean enableUnicode) {
         //Sets default values for width and height
         width = 600;
         height  = 400;
         //Sets this classes die object to the one given
-        dice = dieArray;
+        this.dice = dice;
         //Constructs all components
         frame1 = new JFrame();
         //Uses WrapLayout to help with vertical scrolling
@@ -44,11 +44,12 @@ public class SwingGUI {
         buttons = new JPanel(new WrapLayout());
         aboutButt = new JButton();
         backButt = new JButton();
-        sides = sideIn;
+        this.sides = sides;
         sideCount = new int[sides];
         totalRolls = 0;
         dieBool = new boolean[dice.length];
-        enableUnicode = uniCheck;
+        this.enableUnicode = enableUnicode;
+
     }
     //Method to actually run GUI
     public void runGUI() {

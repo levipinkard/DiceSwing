@@ -5,14 +5,14 @@ import java.util.Random;
 
 public class Die {
     //Instance variables for current side, and total number of sides
-    int sides;
-    int currentSide;
+    private int sides;
+    private int currentSide;
     //Random number generator instance
-    SecureRandom generator;
+    private SecureRandom generator;
     //Takes in number of possible sides, and a number to be added to the seed
-    public Die(int givenSides, int seedAdd) {
+    public Die(int sides, int seedAdd) {
         //Sets sides equal to sides given by method call
-        sides = givenSides;
+        this.sides = sides;
         //Starting side is invalid, prevents wrong data from being given with random class malfunction
         currentSide = 0;
         //Constructs generator, supplies first seed to be current system time in milliseconds

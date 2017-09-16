@@ -14,12 +14,12 @@ public class AboutWindow {
     private JPanel stats;
     private JScrollPane statScroll;
     //Constructs about text and frame
-    public AboutWindow(int[] sideCount, int rolls) {
+    public AboutWindow(int[] sideStat, int totalRolls) {
         aboutText = new JLabel();
         frame1 = new JFrame();
-        sideStat = sideCount;
+        this.sideStat = sideStat;
         calculatedStat = new double[sideStat.length];
-        totalRolls = rolls;
+        this.totalRolls = totalRolls;
         statLabels = new JLabel[sideStat.length];
         stats = new JPanel(new WrapLayout());
         statScroll = new JScrollPane(stats);

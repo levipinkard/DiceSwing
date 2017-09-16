@@ -39,7 +39,7 @@ public class DiePicker {
         sideCount = 6;
     }
     //Second constructor for opening window with existing values
-    public DiePicker(boolean persUni, int persSides, int persDice ) {
+    public DiePicker(boolean persUni, int sideCount, int persDice ) {
         //Constructs all UI features
         dieEnter = new JTextField();
         frame1 = new JFrame();
@@ -52,8 +52,8 @@ public class DiePicker {
         textScroll = new JScrollPane(dieEnter);
         textPanel = new JPanel(new WrapLayout());
         unicodeCheck = new JCheckBox("Enable Unicode",persUni);
-        sideCount = persSides;
-        sideEnter.setText(Integer.toString(persSides));
+        this.sideCount = sideCount;
+        sideEnter.setText(Integer.toString(sideCount));
         dieEnter.setText(Integer.toString(persDice));
     }
     public void runGUI() {

@@ -82,7 +82,7 @@ public class DiePicker {
         //Stops program when window is closed
         frame1.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //Sets title to little dice unicode character, not long enough for full Dice Roll title
-        frame1.setTitle(new String(Character.toChars(127922)));
+        frame1.setTitle("Die Roller");
         //Sets prompt text
         diePrompt.setText("How many dice?");
         sidePrompt.setText("How many sides?");

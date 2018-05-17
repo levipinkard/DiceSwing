@@ -14,12 +14,12 @@ public class AboutWindow {
     private JPanel stats;
     private JScrollPane statScroll;
     //Constructs about text and frame
-    public AboutWindow(int[] sideStat, int totalRolls) {
+    public AboutWindow(int[] sideCount, int rolls) {
         aboutText = new JLabel();
         frame1 = new JFrame();
-        this.sideStat = sideStat;
+        sideStat = sideCount;
         calculatedStat = new double[sideStat.length];
-        this.totalRolls = totalRolls;
+        totalRolls = rolls;
         statLabels = new JLabel[sideStat.length];
         stats = new JPanel(new WrapLayout());
         statScroll = new JScrollPane(stats);
@@ -32,7 +32,9 @@ public class AboutWindow {
             calculatedStat[z] = ((double)sideStat[z] / totalRolls) * 100;
             statLabels[z] = new JLabel();
             statLabels[z].setPreferredSize(new Dimension(150,10));
-            statLabels[z].setText(Integer.toString(z + 1) + ". " + Double.toString(calculatedStat[z]) + "%");
+            String tempStat = Double.toString(calculatedStat[z]);
+            if (tempStat.length() > 4) tempStat = tempStat.substring(0,5);
+            statLabels[z].setText(Integer.toString(z + 1) + ". " + tempStat + "%");
             //Adds all stat labels
             stats.add(statLabels[z]);
         }

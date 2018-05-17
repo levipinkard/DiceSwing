@@ -1,7 +1,6 @@
 package dicegame;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class Die {
     //Instance variables for current side, and total number of sides

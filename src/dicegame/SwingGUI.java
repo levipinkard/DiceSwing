@@ -98,7 +98,7 @@ public class SwingGUI {
             for (int i = 0; i < dice.length; i++)
                 if (e.getSource() == dieDraw[i]) {
                     dieBool[i] = !dieBool[i];
-                    if (dieBool[i] == false) {
+                    if (!dieBool[i]) {
                         dieDraw[i].setForeground(Color.RED);
                     }
                     else {
